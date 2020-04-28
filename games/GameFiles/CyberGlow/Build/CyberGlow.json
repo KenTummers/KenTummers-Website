@@ -1,0 +1,16 @@
+{
+"companyName": "DefaultCompany",
+"productName": "22 april 2020",
+"productVersion": "0.1",
+"dataUrl": "CyberGlow.data.unityweb",
+"wasmCodeUrl": "CyberGlow.wasm.code.unityweb",
+"wasmFrameworkUrl": "CyberGlow.wasm.framework.unityweb",
+"graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
+"webglContextAttributes": {"preserveDrawingBuffer": false},
+"splashScreenStyle": "Dark",
+"backgroundColor": "#231F20",
+"cacheControl": {"default": "must-revalidate"},
+"developmentBuild": false,
+"multithreading": false,
+"unityVersion": "2019.3.0f5"
+}

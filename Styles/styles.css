@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html {
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.element::-webkit-scrollbar { width: 0 !important }
+
+body {
+    background: #200F21;
+    color: white;
+    font-family: 'Roboto';
+    margin: 0;
+    padding: 0;
+}
+header{
+    background: #382039;
+    font-family: 'Roboto';
+    font-size: 25px;
+    padding: 20px;
+    text-align: center;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin-top: 40px;
+}
+
+section{
+    background: #5A3D5C;
+    color: white;
+    padding: 20px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+li{
+    display: inline-block;
+    margin: auto;
+}
+
+div {
+    width: 100px;
+}
+
+footer {
+    font-family: 'Roboto Thin';
+    text-align: center;
+    background-attachment: scroll;
+    background-position: 0% 0%;
+    position: fixed;
+    bottom: 0pt;
+}
+
+h1 {
+    margin: center;
+    color: white;
+}
+
+.features{
+    display: flex;
+    flex-direction: row;
+}
+
+.features figure {
+    margin: auto;
+}
+
+.features figure img{
+    border-radius: 50%;
+    box-shadow: #200F21 0 0 10px;
+    width: 300px;
+}
+
+.socialicons{
+    padding: 2%;
+    clear: both;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.socialicons figure{
+    display: inline-block;
+    margin: auto;
+}
+
+.socialicons figure img{
+    padding: 15px;
+    border-radius: 50%;
+    width: 75px;
+}
+
+.maintext{
+    letter-spacing: 2px;
+    text-align: center;
+    font-family: 'Roboto';
+    font-size: 20px;
+}
+
+h2{
+    text-align: center;
+}
+
+.socialicons figure img:hover {
+    filter: brightness(0.7);
+}
+
+.grid-container {
+    display: grid;
+    grid-gap: 5% 5%;
+    grid-template-columns: auto auto auto;
+    width: 1000px;
+    padding: 50px 0 50px 0;
+    margin:auto;
+    position: relative;
+}
+  
+.grid-item {
+    width: 100%;
+    border-radius: 10%;
+    -webkit-transition: 0.3s ease-in-out, 
+    -webkit-transform 0.3s ease-in-out;
+	-moz-transition:  0.3s ease-in-out, 
+    -moz-transform 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out, 
+    transform 0.3s ease-in-out, ;
+}
+
+.grid-item:hover{
+    transform: scale(1.05); 
+}
+
+.fullscreen{
+    clear: both;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.fullscreen figure{
+    display: inline-block;
+    margin: auto;
+}
+
+.fullscreen figure img{
+    border-radius: 50%;
+    width: 50px;
+}
+
+.fullscreen figure img:hover {
+    filter: brightness(0.7);
+}
+
+.button {
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 25px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-family: "Roboto";
+}
+
+.border{
+    border-style: solid;
+    border-width: 5px;
+    background-color: #382039;
+    border-color: #200F21;
+}
+
+.playbutton{
+    width: auto;
+    text-align: center;
+    padding-top: 250px;
+}
+
+.grid-container-screenshots {
+    display: grid;
+    grid-gap: 2% 2%;
+    grid-template-columns: auto auto auto;
+    width: 50%;
+    margin:auto;
+    position: relative;
+}
+
+.grid-item-screenshots {
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+
+.card {
+    margin: auto;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 black;
+    transition: 0.3s;
+    width: 500px;
+}
+
+.card a{
+    color: white;
+    text-decoration: none;
+}
+  
+.card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+  
+.container {
+    font-family: "Roboto";
+    letter-spacing: 2px;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+}
+
+.codeblock {
+    display: block;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+    background-color:rgb(43, 43, 43);
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New;
+    color: white;
+    width: 1000px;
+    margin: auto;
+}

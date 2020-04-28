@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Ken Tummers - Projects - A*</title>
+    <link rel="shortcut icon" href="/Images/ken.ico">
+    <link rel="stylesheet" href= "/Styles/styles.css">
+    <script src="/hightlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index">HOME</a></li>
+                <li><a href="../games">GAMES</a></li>
+                <li><a href="../projects">PROJECTS</a></li>
+                <li><a href="../contact">CONTACT</a></li>
+            </ul>
+        </nav>
+        <h1>A* Pathfinding Algorithm</h1>
+    </header>
+    <section class="maintext">
+        This is a Python application which is used solve a maze.
+        <br>The application will solve a maze using the A* pathfinding algorithm.
+        <br><br>Below we see the code for the A* algorithm.
+        <br><br>
+        <button class="button" onclick="toggleCode()">Toggle Code</button>
+    </section>
+
+
+    <section id="code" style="display:none">
+        <pre><code class = "codeblock">
+        from heapq import heappop, heappush
+        from PIL import Image, ImageDraw
+        import cv2
+        import time
+
+        #This maze solver algorithm works for mazes which have a border all around
+        #itself. When there's an opening in the border, it won't work.
+
+        #Path to maze
+        mazeImage = "Maze.png"
+
+        #Turning an image into a binary maze
+        start_time = time.time()
+        im = Image.open(mazeImage)
+        width, height = im.size
+        maze = list(im.getdata())
+        for n, i in enumerate(maze):
+            if i == (0, 0, 0) or i == (0, 0, 0, 255):
+                maze[n] = 1
+            else:
+                maze[n] = 0
+        maze = [maze[i * width:(i + 1) * width] for i in range(height)]
+
+        def maze2graph(maze):
+            #Converts the maze into a 2D array and then into a graph
+            #For each node, it will look in which direction it is possible to go
+            height = len(maze)
+            width = len(maze[0]) if height else 0
+            graph = {(i, j): [] for j in range(width) for i in range(height) if not maze[i][j]}
+            for row, col in graph.keys():
+                if row < height - 1 and not maze[row + 1][col]:
+                    graph[(row, col)].append(("S", (row + 1, col)))
+                    graph[(row + 1, col)].append(("N", (row, col)))
+                if col < width - 1 and not maze[row][col + 1]:
+                    graph[(row, col)].append(("E", (row, col + 1)))
+                    graph[(row, col + 1)].append(("W", (row, col)))
+            return graph
+
+        def heuristic(cell, goal):
+            #Manhattan distance heuristic
+            return abs(cell[0] - goal[0]) + abs(cell[1] - goal[1])
+
+        def astar(maze):
+            img = cv2.imread(mazeImage, 1)
+            #img = cv2.resize(img, (0,0), fx=3, fy=3)
+            cv2.imshow(mazeImage, img)
+            #Start coordinates
+            start = (1, 1)
+            #Goal coordinates
+            goal = (len(maze) - 2, len(maze[0]) - 2)
+            pr_queue = []
+            heappush(pr_queue, (0 + heuristic(start, goal), 0, "", start))
+            visited = set()
+            graph = maze2graph(maze)
+            while pr_queue:
+                _, cost, path, current = heappop(pr_queue)
+                if current == goal:
+                    return path
+                if current in visited:
+                    continue
+                visited.add(current)
+                for direction, neighbour in graph[current]:
+                    heappush(pr_queue, (cost + heuristic(neighbour, goal), cost + 1,
+                                        path + direction, neighbour))
+            return "There's no option to get to the end"
+
+        def visualize_solution(maze):
+            #Takes the solution and draws the path on the maze in a new png file
+            img = Image.open(mazeImage)
+            solution = astar(maze)
+            draw = ImageDraw.Draw(img)
+            start = (1, 1)
+            cell = start
+            line_color = (255,0,0)
+            
+            for i in range (len(solution)):
+                if solution[i] == "S":
+                    cell = tuple(map(sum,zip(start,(0,1))))
+                    draw.line([start, cell], fill=line_color, width=1)
+                    start = cell
+                if solution[i] == "E":
+                    cell = tuple(map(sum,zip(start,(1,0))))
+                    draw.line([start, cell], fill=line_color, width=1)
+                    start = cell
+                if solution[i] == "N":
+                    cell = tuple(map(sum,zip(start,(0,-1))))
+                    draw.line([start, cell], fill=line_color, width=1)
+                    start = cell
+                if solution[i] == "W":
+                    cell = tuple(map(sum,zip(start,(-1,0))))
+                    draw.line([start, cell], fill=line_color, width=1)
+                    start = cell
+                    
+            img.save("KenTummers_Solved_Maze.png")
+            imgsol = cv2.imread("KenTummers_Solved_Maze.png", 1)
+            #imgsol = cv2.resize(imgsol, (0,0), fx=3, fy=3)
+
+            cv2.imshow("KenTummers_Solved_Maze.png", imgsol)
+            cv2.waitKey(0)
+
+        print("Directions per node:", maze2graph(maze))
+        print("Maze:", maze)
+        print("Path (N = North, E = East, S = South, W = West):",astar(maze))
+        print("Total steps:", len(astar(maze)))
+        end_time = time.time()
+        print("Time:", end_time - start_time)
+        visualize_solution(maze)
+
+        </code></pre>
+    </section>
+
+    <section class="maintext">
+        This application takes an image consisting out of black and white pixels,
+        <br>where black pixels represent walls, and white pixels represent empty space.
+        <br>The algorithm is only able to solve the problem if there is a path available.
+        <br>The line that the application makes is one pixel wide.
+        <br>Requirements for this application to work is: it needs to have a 1 pixel wide wall around,
+        <br>the startpoint of the maze is the top left corner of the image,
+        <br>the endpoint of the maze is in the bottom right corner of the image,
+        <br>and the image needs to be named 'Maze.png' and has to be in the same folder as the Python program.
+        <br>See an example of a maze below, with the solved maze next to it.
+        <br><br>
+        <figure>
+            <img src = "/Images/Maze.png" alt="Unsolved maze" height="300px">
+            <img src = "/Images/KenTummers_Solved_Maze.png" alt="Solved maze" height="300px">
+        </figure>
+    </section>
+
+    <footer>Ken Tummers</footer>
+
+    <script>        
+        function toggleCode() {
+            var x = document.getElementById("code");
+
+            if (x.style.display == "block"){
+                x.style.display="none";
+            }
+            else if (x.style.display == "none"){
+                x.style.display="block";
+            } 
+        }
+    </script>
+    
+    
+</body>
+</html>

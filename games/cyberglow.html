@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Ken Tummers - Games - Cyberglow</title>
+    <link rel="shortcut icon" href="/Images/ken.ico">
+    <link rel="stylesheet" href="../Styles/styles.css">
+    <script src="/games/GameFiles/CyberGlow/TemplateData/UnityProgress.js"></script>
+    <script src="/games/GameFiles/CyberGlow/Build/UnityLoader.js"></script>
+
+  </head>
+  <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index">HOME</a></li>
+                <li><a href="../games">GAMES</a></li>
+                <li><a href="../projects">PROJECTS</a></li>
+                <li><a href="../contact">CONTACT</a></li>
+            </ul>
+        </nav>
+        <h1>Cyberglow</h1>
+    </header>
+
+    <section class="maintext">
+        Cyberglow is a top-down shooter which contains flashy lights and feels fun to play.
+    </section>
+
+    <section class="features">
+        <figure class="border">
+            <div id="unityContainer" style="width: 960px; height: 540px">
+                <div class = "playbutton">
+                    <button class="button" onclick="runUnityLoader()">Play Game</button>
+                </div>
+            </div>
+        </figure>
+    </section>
+    <section class="fullscreen">
+        <figure>
+            <img id = "fullscreenButton" src = "/Images/fullscreen.png" alt="Fullscreen" onclick="gameInstance.SetFullscreen(1)" style="display:none">
+        </figure>
+    </section>
+        
+    <section class="maintext">
+        Cyberglow is a game which was quickly made in a day worth of time.
+        <br>The main point of the game is to take simple shapes, and making a well polished game out of it.
+        <br>The game mainly focuses on gamefeel, such as screenshake, 
+        <br>feedback of when you kill enemies and feedback when you obtain more score.
+        <br>The enemies makes use of the A* pathfinding algorithm to find the player. 
+    </section>
+
+    <footer>Ken Tummers</footer>
+  </body>
+
+    <script>
+        var gameInstance;
+        
+        function runUnityLoader() {
+            gameInstance = UnityLoader.instantiate("unityContainer", "/games/GameFiles/CyberGlow/Build/CyberGlow.json", {onProgress: UnityProgress});
+            document.getElementById("fullscreenButton").style.display="block";
+        }
+    </script>
+
+</html>

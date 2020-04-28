@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Ken Tummers - Games - DavesBirthdayParty</title>
+    <link rel="shortcut icon" href="/Images/ken.ico">
+    <link rel="stylesheet" href="../Styles/styles.css">
+    <script src="/games/GameFiles/DavesBirthdayParty/TemplateData/UnityProgress.js"></script>
+    <script src="/games/GameFiles/DavesBirthdayParty/Build/UnityLoader.js"></script>
+
+  </head>
+  <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index">HOME</a></li>
+                <li><a href="../games">GAMES</a></li>
+                <li><a href="../projects">PROJECTS</a></li>
+                <li><a href="../contact">CONTACT</a></li>
+            </ul>
+        </nav>
+        <h1>Dave's Birthday Party</h1>
+    </header>
+
+    <section class="maintext">
+        In Dave's Birthday Party you get invited to Dave's birthday party, but there is a twist.
+        <br>You live on a mountain, while Dave lives all the way down on the ground.
+    </section>
+
+    <section class="features">
+        <figure class="border">
+            <div id="unityContainer" style="width: 960px; height: 540px">
+                <div class = "playbutton">
+                    <button class="button" onclick="runUnityLoader()">Play Game</button>
+                </div>
+            </div>
+        </figure>
+    </section>
+    <section class="fullscreen">
+        <figure>
+            <img id = "fullscreenButton" src = "/Images/fullscreen.png" alt="Fullscreen" onclick="gameInstance.SetFullscreen(1)" style="display:none">
+        </figure>
+    </section>
+        
+    <section class="maintext">
+        Dave's Birthday Party is a game made for Ludum Dare 46.
+        <br>Ludum Dare is a gamejam competition, where participants have to complete a game in 48 hours.
+        <br>The participants have to create everything from scratch, such as code, art and music.
+    </section>
+
+    <footer>Ken Tummers</footer>
+  </body>
+
+    <script>
+        var gameInstance;
+        
+        function runUnityLoader() {
+            gameInstance = UnityLoader.instantiate("unityContainer", "/games/GameFiles/DavesBirthdayParty/Build/DavesBirthdayParty.json", {onProgress: UnityProgress});
+            document.getElementById("fullscreenButton").style.display="block";
+        }
+    </script>
+
+</html>
